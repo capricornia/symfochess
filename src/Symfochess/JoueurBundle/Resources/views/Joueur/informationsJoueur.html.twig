@@ -1,0 +1,15 @@
+{# src/Symfochess/JoueurBundle/Resources/views/Joueur/informationsJoueur.html.twig #}
+
+{% stylesheets '@SymfochessJoueurBundle/Resources/public/css/style.css' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
+
+
+{# Pas besoin de vérifier si l'utilisateur est logué : c'est dans le security.yml #}
+
+<span class="libelleFormulaire">Pénom : </span><span class="valeurEnBase">{{ app.user.prenom }}</span><br/>
+<span class="libelleFormulaire">Nom : </span><span class="valeurEnBase">{{ app.user.nom }}</span><br/>
+<span class="libelleFormulaire">Pseudo: </span><span class="valeurEnBase">{{ app.user.username }}</span><br/>
+<span class="libelleFormulaire">Date de naissance : </span><span
+        class="valeurEnBase">{{ app.user.dateNaissance|date("d/m/y") }}</span><br/>
+<a href="{{ url('symfochess_joueur_modifier', {'id': app.user.id}) }}">Mettre à jour mes informations</a><br/>

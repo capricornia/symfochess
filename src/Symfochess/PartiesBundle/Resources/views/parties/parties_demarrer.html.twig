@@ -1,0 +1,14 @@
+<h1>{{ partie.titre }}</h1>
+Créée le {{ partie.date|date('d/m/Y') }} par {{ partie.joueur.username }}, elle l'oppose à
+{% for joueur in partie.adversaires %}
+    {{ joueur.prenom }} {{ joueur.nom }}{% if loop.last != true %}, {% endif %}
+{% endfor %}
+
+<br/>
+<br/>
+Choisissez votre couleur!!<br/>
+Pour rappel : blanc, vous commencez, noir, je demande à votre adversaire.
+
+<a href="{{ url('symfochess_demarrer_partie', {id: partie.id}) }}">Blanc</a> / <a
+        href="{{ url('notification_commencer_partie', {partie_id: partie.id, joueur_id: partie.adversaires.0.id}) }}">Noir</a>
+

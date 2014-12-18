@@ -1,0 +1,44 @@
+{# src/Symfochess/PartiesBundle/Resources/views/parties/damier.html.twig #}
+
+{% stylesheets '@SymfochessJoueurBundle/Resources/public/css/*' '@SymfochessPartiesBundle/Resources/public/css/*' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
+
+{% javascripts '@SymfochessPartiesBundle/Resources/public/js/jquery/*' '@SymfochessPartiesBundle/Resources/public/js/*' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{# On génère le javascript pour gérer le tableau contenant les cases et les pièces #}
+{% set tableauEchiquier = "var tableauEchiquier = new Array();" %}
+
+{# Rangées #}
+{% for i in 8..1 %}
+    {% set compteur = 0 %}
+    {# On met à jour le tableau js #}
+    {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "] = new Array();\n" %}
+    {% for j in "A".."H" %}
+        {% set compteur = compteur+1 %}
+        {% if ( compteur + i ) % 2 ==0 %}
+            {% set classe='casePair' %}
+        {% else %}
+            {% set classe='caseImpair' %}
+        {% endif %}
+        {% set case = "#{j}#{i}" %}
+        <div class="case {{ classe }}" id="case{{ j }}{{ i }}" name="case_{{ compteur }}_{{ i }}">
+            {% if pieces[ case ] is defined %}
+                {% set image = 'pieces/' ~ pieces[case].type ~ pieces[case].couleur ~ '.svg' %}
+                <img class="imgpion" src="{{ asset('bundles/symfochessparties/images/' ~ image) }}"
+                     id="piece{{ j }}{{ i }}" name="{{ pieces[case].type }}">
+                {# On met à jour le tableau js #}
+                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "][" ~ compteur ~ "] = {piece: '" ~ pieces[case].type ~ "', coulleur: '" ~ pieces[case].couleur ~ "'};\n" %}
+            {% else %}
+                {# On met à jour le tableau js #}
+                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "][" ~ compteur ~ "] = null;\n" %}
+            {% endif %}</div>
+    {% endfor %}
+    <br/>
+{% endfor %}
+
+<script type="text/javascript">
+    {{ tableauEchiquier|raw }}
+</script>

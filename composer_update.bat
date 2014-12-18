@@ -1,0 +1,1 @@
+php -c ..\..\php\php.ini ..\composer.phar update

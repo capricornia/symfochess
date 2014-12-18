@@ -1,0 +1,36 @@
+symfochess_parties_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SymfochessPartiesBundle:Default:index }
+
+symfochess_parties_nouvelle:
+    path:     /parties/nouvelle
+    defaults: { _controller: SymfochessPartiesBundle:Parties:nouvellePartie }
+
+symfochess_accepter_invitation:
+    path:     /invitation/accepter/{id}
+    defaults: { _controller: SymfochessPartiesBundle:Parties:accepterInvitation }
+
+symfochess_refuser_invitation:
+    path:     /invitation/refuser/{id}
+    defaults: { _controller: SymfochessPartiesBundle:Parties:refuserInvitation }
+
+# Résumé de toutes les données de la partie
+symfochess_infos_partie:
+     path:     /parties/infos/{id}
+     defaults: { _controller: SymfochessPartiesBundle:Parties:infos }
+
+# Commencer la partie : jouer ou laisser le jeu
+symfochess_commencer_partie:
+     path:     /parties/commencer/{id}
+     defaults: { _controller: SymfochessPartiesBundle:Parties:commencer }
+
+# Commencer la partie (jouer le premier coup)
+symfochess_demarrer_partie:
+     path:     /parties/demarrer/{id}
+     defaults: { _controller: SymfochessPartiesBundle:Parties:jouer }
+
+# Notifier l'adversaire qu'on le laisse commencer
+notification_commencer_partie:
+     path:     /parties/notificationAdversaire/{partie_id}/{joueur_id}
+     defaults: { _controller: SymfochessPartiesBundle:Parties:notifierAdversaire }
+

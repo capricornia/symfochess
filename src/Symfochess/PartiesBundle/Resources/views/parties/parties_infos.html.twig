@@ -1,0 +1,16 @@
+<h1>{{ partie.titre }}</h1>
+Créée le {{ partie.date|date('d/m/Y') }} par {{ partie.joueur.username }}, elle l'oppose à
+{% for joueur in partie.adversaires %}
+    {{ joueur.prenom }} {{ joueur.nom }}{% if loop.last != true %}, {% endif %}
+{% endfor %}
+
+{% if partie.etat == 'CR' %}
+    La partie est en attente de validation des joueurs.<br/>
+    La validation est :<br/>
+    {% for invitation in invitations %}
+        {{ invitation.destinataire.prenom }} {{ invitation.destinataire.nom }} ({{ invitation.id }}) :
+        {% if invitation.etat == 'AC' %} acceptée.
+        {% elseif invitation.etat == 'AV' %} En attente de validation.
+        {% else %} en erreur ({{ invitation.etat }}) {% endif %}
+    {% endfor %}
+{% endif %}

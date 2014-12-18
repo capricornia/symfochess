@@ -1,0 +1,6 @@
+{% include 'SymfochessJoueurBundle:Joueur:informationsJoueur.html.twig' %}
+{{ app.user.username }}<br/>
+{% render '/joueur/testservice' %}<br/>
+<a href="{{ path('symfochess_parties_nouvelle') }}">Nouvelle partie</a><br/>
+{{ render(controller("SymfochessJoueurBundle:Joueur:listeParties")) }}<br/>
+

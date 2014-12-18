@@ -1,0 +1,12 @@
+services:
+#    symfochess_joueur.example:
+#        class: Symfochess\JoueurBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    joueur.widgetconnexion:
+        class: Symfochess\JoueurBundle\Widgets\Connexion
+        arguments: [@security.context]
+
+    joueur.widgetlisteParties:
+        class: Symfochess\JoueurBundle\Widgets\ListeParties
+        arguments: [@security.context]

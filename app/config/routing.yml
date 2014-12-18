@@ -1,0 +1,12 @@
+symfochess_parties:
+    resource: "@SymfochessPartiesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+symfochess_security:
+    resource: "@SymfochessSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+symfochess_joueur:
+    resource: "@SymfochessJoueurBundle/Resources/config/routing.yml"
+    prefix:   /
+

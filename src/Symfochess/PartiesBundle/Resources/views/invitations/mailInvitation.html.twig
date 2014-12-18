@@ -1,0 +1,6 @@
+Bonjour {{ joueur.username }},
+
+{{ app.user.username }} vous invite à l'afronter pour une partie sur symfochess!!
+
+<a href="{{ url('symfochess_accepter_invitation', {'id': invitation.id} ) }}">Accepter</a> <a
+        href="{{ url('symfochess_refuser_invitation', {'id': invitation.id} ) }}">Refuser</a>

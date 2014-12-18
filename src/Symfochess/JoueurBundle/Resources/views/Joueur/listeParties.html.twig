@@ -1,0 +1,15 @@
+<div id="listeParties" class="listes">
+    <ul id="ulParties">
+        {% for partie in parties %}
+            <li>{{ partie.titre }} initialisée par {{ partie.joueur.username }}
+                ({% for joueur in partie.adversaires %}
+                {{ joueur.prenom }} {{ joueur.nom }}{% if loop.last != true %}, {% endif %}
+                {% endfor %})
+                ({{ partie.etat }}) <a href="{{ url('symfochess_infos_partie', {'id': partie.id}) }}">Informations
+                    partie</a>
+                {% if partie.etat == "PR" %}<a href="{{ url('symfochess_commencer_partie', {'id': partie.id}) }}">
+                        Démarrer partie</a>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,11 @@
+{% if erreurs %}
+    <div>{{ erreurs.message }}</div>
+{% endif %}
+<form action="{{ path('symfochess_security_verif_identification') }}" method="post">
+    <label for="username">Pseudo : </label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}">
+    <label for="password">Mot de passe : </label>
+    <input type="password" id="password" name="_password">
+    <button type="submit">Connexion</button>
+</form>
+

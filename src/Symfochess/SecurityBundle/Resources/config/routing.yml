@@ -1,0 +1,10 @@
+symfochess_security_identification:
+    path:     /connexion
+    defaults: { _controller: SymfochessSecurityBundle:Identification:connexion }
+
+symfochess_security_verif_identification:
+    path:     /verification_connexion
+    defaults: { _controller: SymfochessSecurityBundle:Identification:verifconnexion }
+
+symfochess_security_logout:
+    path:     /logout

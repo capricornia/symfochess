@@ -1,0 +1,27 @@
+symfochess_joueur_bienvenue:
+    path:     /bienvenue/{message}
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:bienvenue }
+
+symfochess_joueur_ajouter:
+    path:     /joueur/ajouter
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:ajouterJoueur }
+
+symfochess_joueur_afficher:
+    path:     /joueur/afficher/{id}
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:afficherJoueur }
+
+symfochess_joueur_nouveau:
+    path:     /joueur/nouveau
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:nouveauJoueur }
+
+symfochess_joueur_modifier:
+    path:     /joueur/modifier/{id}
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:nouveauJoueur }
+
+symfochess_joueur_tableau_bord:
+    path:     /joueur/tableaudebord
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:tableauDeBord }
+
+symfochess_test_service:
+    path:     /joueur/testservice
+    defaults: { _controller: SymfochessJoueurBundle:Joueur:testservice }
