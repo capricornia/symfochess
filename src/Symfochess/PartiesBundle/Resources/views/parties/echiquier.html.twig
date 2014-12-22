@@ -11,11 +11,14 @@
 {# On génère le javascript pour gérer le tableau contenant les cases et les pièces #}
 {% set tableauEchiquier = "var tableauEchiquier = new Array();" %}
 
+{# Initialisation du tableau#}
+{% for i in 1..8 %}
+    {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "] = new Array();\n" %}
+{% endfor %}
+
 {# Rangées #}
 {% for i in 8..1 %}
     {% set compteur = 0 %}
-    {# On met à jour le tableau js #}
-    {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "] = new Array();\n" %}
     {% for j in "A".."H" %}
         {% set compteur = compteur+1 %}
         {% if ( compteur + i ) % 2 ==0 %}
@@ -30,10 +33,10 @@
                 <img class="imgpion" src="{{ asset('bundles/symfochessparties/images/' ~ image) }}"
                      id="piece{{ j }}{{ i }}" name="{{ pieces[case].type }}">
                 {# On met à jour le tableau js #}
-                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "][" ~ compteur ~ "] = {piece: '" ~ pieces[case].type ~ "', coulleur: '" ~ pieces[case].couleur ~ "'};\n" %}
+                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ compteur ~ "][" ~ i ~ "] = {piece: '" ~ pieces[case].type ~ "', couleur: '" ~ pieces[case].couleur ~ "'};\n" %}
             {% else %}
                 {# On met à jour le tableau js #}
-                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ i ~ "][" ~ compteur ~ "] = null;\n" %}
+                {% set tableauEchiquier = tableauEchiquier ~ "tableauEchiquier[" ~ compteur ~ "][" ~ i ~ "] = null;\n" %}
             {% endif %}</div>
     {% endfor %}
     <br/>
@@ -41,4 +44,5 @@
 
 <script type="text/javascript">
     {{ tableauEchiquier|raw }}
+    console.log("tableauEchiquier", tableauEchiquier);
 </script>

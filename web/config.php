@@ -57,7 +57,7 @@ $minorProblems = $symfonyRequirements->getFailedRecommendations();
                     </button>
                 </div>
             </form>
-        </div>
+                </div>
     </div>
 
     <div class="sf-reset">
@@ -109,7 +109,7 @@ $minorProblems = $symfonyRequirements->getFailedRecommendations();
 
                 <?php if (!count($majorProblems) && !count($minorProblems)): ?>
                     <p class="ok">Your configuration looks good to run Symfony.</p>
-                <?php endif; ?>
+                        <?php endif; ?>
 
                 <ul class="symfony-install-continue">
                     <?php if (!count($majorProblems)): ?>
@@ -122,8 +122,8 @@ $minorProblems = $symfonyRequirements->getFailedRecommendations();
                 </ul>
             </div>
         </div>
-    </div>
+            </div>
     <div class="version">Symfony Standard Edition</div>
-</div>
+        </div>
 </body>
 </html>

@@ -1,3 +1,7 @@
+symfochess_accueil_temporaire:
+    path:     /
+    defaults: { _controller: SymfochessSecurityBundle:Identification:connexion }
+
 symfochess_security_identification:
     path:     /connexion
     defaults: { _controller: SymfochessSecurityBundle:Identification:connexion }
