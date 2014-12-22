@@ -77,7 +77,15 @@ var gestionDeplacements = {
             tableauEchiquier[this.coordDepart.x][this.coordDepart.y] = null;
         } else {
             //--- Message d'erreur
-            alert(retourVerifDeplacement.getMessage());
+            $("#dialog").html(retourVerifDeplacement.getMessage()).dialog({
+                modal: true,
+                buttons: {
+                    "Ah d'accord!!": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            //alert(retourVerifDeplacement.getMessage());
 
             //--- On replace la pièce dans sa position d'origine'
             gestionDeplacements.piece_en_cours.css('top', 0);
@@ -91,6 +99,12 @@ var gestionDeplacements = {
             case 'P':
                 return this.checkDeplacementPion();
                 break;
+            case 'R':
+                return this.checkDeplacementRoi();
+                break;
+            case 'D':
+                return this.checkDeplacementDame();
+                break;
             default :
                 return new Retour(false, "Déplacement non encore géré... :-(");
         }
@@ -100,12 +114,12 @@ var gestionDeplacements = {
         if ((this.couleur == 'B' && this.coordDepart.y == 2) || (this.couleur == 'N' && this.coordDepart.y == 7)) {
             //--- Le joueur peut avancer d'une ou deux cases
             if (Math.abs(this.coordArrivee.y - this.coordDepart.y) > 2) {
-                return new Retour(false, "Vous ne pouvez pas avancer de " + Math.abs(this.coordArrivee.y - this.coordDepart.y) + " cases (premier déplacement : 2 cases maximum)");
+                return new Retour(false, "&#9817;Vous ne pouvez pas avancer de " + Math.abs(this.coordArrivee.y - this.coordDepart.y) + " cases (premier déplacement : 2 cases maximum)");
             }
         } else {
             //--- Le joueur peut avancer d'une cases
             if (Math.abs(this.coordArrivee.y - this.coordDepart.y) > 1) {
-                return new Retour(false, "Vous ne pouvez pas avancer de " + Math.abs(this.coordArrivee.y - this.coordDepart.y) + " cases (1 case maximum)");
+                return new Retour(false, "&#9817;Vous ne pouvez pas avancer de " + Math.abs(this.coordArrivee.y - this.coordDepart.y) + " cases (1 case maximum)");
             }
         }
         //--- Le joueur avance en ligne droite sauf s'il a pris une autre pièce
@@ -113,20 +127,50 @@ var gestionDeplacements = {
             console.log("Il y a une piece dans case d'arrivee", this.coordArrivee.y - this.coordDepart.y, this.coordArrivee.x - this.coordDepart.x);
             //--- Il y avait une pièce dans la case d'arrivée => le déplacement doit être diagonal
             if (Math.abs(this.coordArrivee.y - this.coordDepart.y) != 1 || Math.abs(this.coordArrivee.x - this.coordDepart.x) != 1) {
-                return new Retour(false, "Vous ne pouvez prendre une pièce que sur une case adjacente en diagonale");
+                return new Retour(false, "&#9817; Vous ne pouvez prendre une pièce que sur une case adjacente en diagonale");
             }
         } else {
             console.log("Il y n'y a pas une piece dans case d'arrivee");
             //--- Il y avait une pièce dans la case d'arrivée => La pièce a dû avancer d'une case en ligne droite
             if (Math.abs(this.coordArrivee.x - this.coordDepart.x) != 0) {
-                return new Retour(false, "Vous ne pouvez avancer qu'en ligne droite!!");
+                return new Retour(false, "&#9817;Vous ne pouvez avancer qu'en ligne droite!!");
             }
         }
         console.log("Piece dans case d'arrivee : ", this.coordArrivee.x, this.coordArrivee.y, tableauEchiquier[this.coordArrivee.x][this.coordArrivee.y], typeof(tableauEchiquier[this.coordArrivee.x][this.coordArrivee.y]));
         //if(tableauEchiquier[x][y])
 
-        return new Retour(true, "Déplacement autorisé!!");
+        return new Retour(true, "&#9817;Déplacement autorisé!!");
     },
+
+    /**
+     *
+     * Vérification de la validité de déplacement du roi (une case dans n'importe quelle direction)
+     *
+     */
+    checkDeplacementRoi: function () {
+        if (Math.abs(this.coordArrivee.y - this.coordDepart.y) > 1 || Math.abs(this.coordArrivee.x - this.coordDepart.x) > 1) {
+            return new Retour(false, "&#9812;Le roi ne peut avancer que d'une case dans n'importe quelle direction!!");
+        } else {
+            //--- Gestion roque
+            return new Retour(true, "&#9817;Déplacement autorisé!!");
+        }
+    },
+
+    /**
+     * Vérification dez déplacements de la dame (toute direction en ligne droite)
+     *
+     */
+    checkDeplacementDame: function () {
+        if (Math.abs(this.coordArrivee.x - this.coordDepart.x) != 0 && !(Math.abs(this.coordArrivee.y - this.coordDepart.y) == 0 || Math.abs(this.coordArrivee.x - this.coordDepart.x) != Math.abs(this.coordArrivee.y - this.coordDepart.y)) || Math.abs(this.coordArrivee.x - this.coordDepart.x) > 1 ||
+            Math.abs(this.coordArrivee.y - this.coordDepart.y) != 0 && !(Math.abs(this.coordArrivee.x - this.coordDepart.x) == 0 || Math.abs(this.coordArrivee.x - this.coordDepart.x) != Math.abs(this.coordArrivee.y - this.coordDepart.y)) || Math.abs(this.coordArrivee.x - this.coordDepart.x) > 1) {
+            return new Retour(false, "&#9812;La ne peut avancer qu'en ligne droite dans n'importe quelle direction!!");
+        } else {
+            //--- Gestion roque
+            return new Retour(true, "&#9817;Déplacement autorisé!!");
+        }
+
+    },
+
 
     /**
      *

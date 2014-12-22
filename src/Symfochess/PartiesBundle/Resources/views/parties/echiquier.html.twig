@@ -7,6 +7,10 @@
 {% javascripts '@SymfochessPartiesBundle/Resources/public/js/jquery/*' '@SymfochessPartiesBundle/Resources/public/js/*' %}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
+<p>&#9817; Pion blanc</p>
+<p>&#9823; Pion noir</p>
+<p>&#9812; Roi blanc</p>
+<p>&#9818; Roi noir</p>
 
 {# On génère le javascript pour gérer le tableau contenant les cases et les pièces #}
 {% set tableauEchiquier = "var tableauEchiquier = new Array();" %}
@@ -41,6 +45,8 @@
     {% endfor %}
     <br/>
 {% endfor %}
+
+<div id="dialog"></div>
 
 <script type="text/javascript">
     {{ tableauEchiquier|raw }}
