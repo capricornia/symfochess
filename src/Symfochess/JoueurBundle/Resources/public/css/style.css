@@ -29,3 +29,7 @@
 .caseImpair {
     background-color: lightgray;
 }
+
+.possible {
+    background-color: lightgreen;
+}

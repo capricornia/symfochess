@@ -1,17 +1,19 @@
 {# src/Symfochess/PartiesBundle/Resources/views/parties/damier.html.twig #}
+{% extends 'SymfochessJoueurBundle:General:structure.html.twig' %}
 
-{% stylesheets '@SymfochessJoueurBundle/Resources/public/css/*' '@SymfochessPartiesBundle/Resources/public/css/*' %}
-<link rel="stylesheet" href="{{ asset_url }}"/>
-{% endstylesheets %}
 
-{% javascripts '@SymfochessPartiesBundle/Resources/public/js/jquery/*' '@SymfochessPartiesBundle/Resources/public/js/*' %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+{% block principal %}
 <p>&#9817; Pion blanc</p>
 <p>&#9823; Pion noir</p>
 <p>&#9812; Roi blanc</p>
 <p>&#9818; Roi noir</p>
-
+    <p>&#9815; Fou blanc</p>
+    <p>&#9821; Fou noir</p>
+    <p>&#9816; Cavalier blanc</p>
+    <p>&#9822; Cavalier noir</p>
+    <p>&#9814; Tour blanche</p>
+    <p>&#9820; Tour noire</p>
+    <input type="checkbox" id="avecAide"/><label for="avecAide">Afficher les déplacements possibles</label><br/>
 {# On génère le javascript pour gérer le tableau contenant les cases et les pièces #}
 {% set tableauEchiquier = "var tableauEchiquier = new Array();" %}
 
@@ -47,8 +49,21 @@
 {% endfor %}
 
 <div id="dialog"></div>
+    <script type="text/javascript">
+        {{ tableauEchiquier|raw }}
+        console.log("tableauEchiquier", tableauEchiquier);
+    </script>
+{% endblock %}
 
-<script type="text/javascript">
-    {{ tableauEchiquier|raw }}
-    console.log("tableauEchiquier", tableauEchiquier);
-</script>
+
+{% block entete %}
+    {% stylesheets '@SymfochessJoueurBundle/Resources/public/css/*' '@SymfochessPartiesBundle/Resources/public/css/*' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    {% javascripts '@SymfochessPartiesBundle/Resources/public/js/jquery/*' '@SymfochessPartiesBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% block titre %}Partie en cours{% endblock %}
+{% endblock %}
+
